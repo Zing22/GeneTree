@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>家谱</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+</head>
+<body onselectstart="return false">
+    <div class="container-fluid" id="inverted-contain">
+        <div class="row panzoom-parent">
+            <a id="open-btn"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></a>
+            <div class="col-sm-3 col-md-2 sidebar">
+                <a id="close-btn"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
+                <ul class="nav nav-sidebar">
+                    <li><h3>Gene tree</h3></li>
+                    <li><hr /></li>
+                    <li>
+                        <div id="input-div">
+                            <textarea autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" rows="8" cols="" id="json-data"></textarea>
+                            <a class="btn btn-default btn-block" href="#" id="load-btn">Load data</a>
+                            <a class="btn btn-default btn-block" href="#" id="save-btn">Save tree</a>
+                            <a class="btn btn-default btn-block" href="#" id="clear-btn">Clear text</a>
+                        </div>
+                    </li>
+                    <!-- <li class="zclip-wrap"><a class="btn btn-default btn-block" href="#" id="copy-btn">Copy data</a></li> -->
+                </ul>
+            </div>
+            <div class="col-sm-12 col-md-12 panzoom" id="container"></div>
+        </div>
+    </div>
+    <div id="links-list" hidden="true"><textarea autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" rows="10" cols="" id="links-list-area"></textarea></div>
+    <a class="btn btn-primary" href="#" id="show-links-btn">Show links</a>
+    <input type="text" class="form-control" placeholder="Search for..." id="search-input" autofocus>
+    <a class="btn btn-default" href="#" id="search-btn"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
+    <div class="btn-group" id="re-btn-list">
+        <button type="button" class="btn btn-primary" id="rebuild-btn">Reorganize</button>
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="caret"></span>
+            <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="#" id="real-time-btn">Real time on</a></li>
+            <li><a href="#" id="change-bg-btn">New background</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#" id="destroy-btn">*** Destroy All ***</a></li>
+        </ul>
+    </div>
+
+
+    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="js/ZeroClipboard.js"></script>
+    <script type="text/javascript" src="js/jquery.panzoom.js"></script>
+    <script type="text/javascript" src="js/jsPlumb-2.0.4.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/logic.js"></script>
+    <script>
+        document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')
+    </script>
+</body>
+</html>
