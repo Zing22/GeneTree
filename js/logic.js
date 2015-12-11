@@ -324,6 +324,7 @@ jsPlumb.ready(function() {
 
     var showBtnList = function(X, Y, iden) {
         X -= parseInt($("#container").css("margin-left"), 10);
+        Y += $("#container").scrollTop();
 
         var list = $('<div>').addClass('btn-list');
         var btn1 = $('<button>').addClass("btn btn-default").attr("aria-label", "Left Align");
@@ -348,9 +349,10 @@ jsPlumb.ready(function() {
         btn3.click(function(){
             createPerson(X, Y, iden, "daut");
         });
+        console.log("Scroll: "+$("#container").scrollTop());
         list.css({
             'left': X,
-            'top': Y
+            'top': Y 
         });
         $('#container').append(list);
         list.hide();
@@ -767,24 +769,7 @@ jsPlumb.ready(function() {
     console.log("Done.");
 });
 
-$(document).ready(function() {
-    //配置ZeroClipboard.swf
-    ZeroClipboard.config({
-        swfPath: 'js/ZeroClipboard.swf'
-    });
-
-    //初始化
-    var client = new ZeroClipboard(document.getElementById("copy-btn"));
-
-    client.on("ready", function(readyEvent) {
-        client.on("copy", function(event) {
-            var clipboard = event.clipboardData;
-            var copyText = $("#json-data").val();
-            clipboard.setData("text/plain", copyText); // 将内容添加到剪切板
-        });
-    });
-});
-
 
 // 2015 12 09 18 07
 // 2015 12 09 22 25
+// 2015 12 11 16 31
