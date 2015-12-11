@@ -349,7 +349,6 @@ jsPlumb.ready(function() {
         btn3.click(function(){
             createPerson(X, Y, iden, "daut");
         });
-        console.log("Scroll: "+$("#container").scrollTop());
         list.css({
             'left': X,
             'top': Y 
@@ -381,15 +380,7 @@ jsPlumb.ready(function() {
 
 
     instance.bind("connection", function (info, originalEvent) {
-        console.log("Connect: " + info.sourceId + ", " + info.targetId);
         $("#"+info.targetId).attr('root', $("#"+info.sourceId).attr('root'));
-        // if (check(info)) {
-        //     return true;
-        // } else if(originalEvent) {
-        //     console.log("This connection is not allowed.")
-        //     return false;
-        // }
-        // return false;
     });
 
 
@@ -400,7 +391,6 @@ jsPlumb.ready(function() {
                 con = connection;
             }
         });
-        if(!con) console.log("Fail to get...");
         return con;
     };
 
@@ -429,7 +419,6 @@ jsPlumb.ready(function() {
 
 
     instance.bind("connectionDetached", function(info, originalEvent) {
-        console.log("Detach: " + info.sourceId + ", " + info.targetId);
         var tar = $("#"+info.targetId)
         tar.attr('root', tar.attr('id'));
         beginDetachAll(info.targetId);
@@ -438,8 +427,6 @@ jsPlumb.ready(function() {
 
 
     instance.bind("connectionMoved", function(info, originalEvent) {
-        console.log("Move original: " + info.originalSourceId + ", " + info.originalTargetId);
-        console.log("Move new: " + info.newSourceId  + ", " + info.newTargetId);
         var tar = $("#"+info.originalTargetId)
         tar.attr('root', tar.attr('id'));
         beginDetachAll(info.originalTargetId);
@@ -528,26 +515,26 @@ jsPlumb.ready(function() {
         } else {
             return;
         }
-        // console.log("Building: " + person["info"]["iden"] + ", i=" + i);
         me.attr('root', 'root');
         setAge(me, person["info"]["age"]);
         return me;
-    };
-
-    var readData = function() {
-        var txt = $("#json-data").val();
-        return $.parseJSON(txt);
     };
 
     $("#load-btn").click(function(event) {
         instance.empty("container");
         levNum = [];
         i = 0;
-        var json = readData();
-        buildTree(json, 0);
-        setTimeout(function(){
-            $("#close-btn").click();
-        }, 1500);
+        try {
+            var txt = $("#json-data").val();
+            var json = $.parseJSON(txt);
+            buildTree(json, 0);
+            setTimeout(function(){
+                $("#close-btn").click();
+            }, 1500);
+        } catch(e) {
+            setTimeout(function(){$("#destroy-btn").click();}, 300);
+            alert("Data error!");
+        }
     });
 
     var familyTree = {};
@@ -723,7 +710,7 @@ jsPlumb.ready(function() {
 
     ////// New functions begin //////////
     var newBg = function(imgNum) {
-        $("#container").css('background-image', "url(img/bg" + imgNum + ".png)");
+        $("#container").css('background-image', "url(../static/img/gene/bg" + imgNum + ".png)");
     };
 
 
