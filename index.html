@@ -26,7 +26,34 @@
                             <a class="btn btn-default btn-block" href="#" id="clear-btn">Clear text</a>
                         </div>
                     </li>
-                    <!-- <li class="zclip-wrap"><a class="btn btn-default btn-block" href="#" id="copy-btn">Copy data</a></li> -->
+                    <li>
+                        <div id="help-div">
+                            <hr />
+                            <a href="#" id="show-help-btn">Got problem?</a>
+                            <div id="help-text">
+                                <h3>使用说明</h3>
+                                <p><b>0. </b>画布初始为家族起源人。</p>
+                                <p><b>1. </b>双击画布空白处新建成员。</p>
+                                <p><b>2. </b>拖动空心方块或空心圆进行连线。<a href="#" id="detail-btn">详细连接规则</a>。</p>
+                                <p><b>3. </b>双击成员可以修改个人资料。</p>
+                                <p><b>4. </b>画布右上方是搜索、查询、重构等功能区。</p>
+                                <p><b>5. </b>左侧控制栏是数据读入、储存等功能区。</p>
+                                <p><b>6. </b>控制栏可以隐藏、开启。</p>
+                                <p><b>7. </b>所有成员必须连接在以root为根的树上，不能出现子树。</p>
+                            </div>
+                            <div id="help-conn">
+                                <h3>连接规则</h3>
+                                <p><b>0. </b>共有三种成员：<blue>男人</blue>，<blue>女人</blue>和<blue>女孩</blue>。</p>
+                                <p><b>1. </b>起源<blue>root</blue>属于特殊的<blue>男人</blue>类型。</p>
+                                <p><b>2. </b><blue>男人</blue>只能向<blue>女人（妻子）</blue>连线。</p>
+                                <p><b>3. </b><blue>女人</blue>能向<blue>男人或女孩（孩子）</blue>连线。</p>
+                                <p><b>4. </b><blue>女孩</blue>不能向外连线。</p>
+                                <p><b>5. </b>任何成员，只能被<blue>新增</blue>到<b>root</b>树上，其他连接均不被允许。</p>
+                                <p><b>6. </b><blue>删除</blue>或<blue>断连</blue>成员时，其子树所有成员将被<blue>断连</blue>，且允许重连到其他分支。</p>
+                                <p><b>7. </b><blue>储存</blue>、<blue>重构</blue>等操作，会忽略未连接到root树上的成员。</p>
+                            </div>
+                        </div>
+                    </li>
                 </ul>
             </div>
             <div class="col-sm-12 col-md-12 panzoom" id="container"></div>
@@ -55,8 +82,8 @@
     <script type="text/javascript" src="js/jsPlumb-2.0.4.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/logic.js"></script>
-    <script>
+    <!-- <script>
         document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')
-    </script>
+    </script> -->
 </body>
 </html>
