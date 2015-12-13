@@ -237,6 +237,8 @@ jsPlumb.ready(function() {
                     return false;
                 }
             }
+        } else {
+            name = "Root";
         }
         name = (name)?name:iden;
         a = (a)?a:"xxxx - xxxx";
@@ -438,16 +440,48 @@ jsPlumb.ready(function() {
         createPerson(event.pageX, event.pageY, "Human" + i);
     });
 
+    var getNumList = function() {
+        var result = {
+            "root":0,
+            "man":1,
+            "wife":0,
+            "daut":0,
+            "mostWife": "Nobody",
+            "mostChild": "Nobody",
+        };
+        familyTree = {};
+        var flag = SaveConnectionSet();
+        if(flag) {
+            var type, len;
+            var maxWifeNum=0, maxChildNum=0;
+            $.each($(".item"), function(n, el){
+                el = $(el);
+                type = el.attr("type");
+                len = (familyTree[el.attr("id")])?familyTree[el.attr("id")].length:0;
+                if((type==="root" || type==="man") && len>maxWifeNum) {
+                    result["mostWife"] = el.attr("name");
+                    maxWifeNum = len;
+                } else if(type==="wife" && len>maxChildNum) {
+                    result["mostChild"] = el.attr("name");
+                    maxChildNum = len;
+                }
+                result[type] ++;
+            });
+        }
+        result["all"] = result["man"] + result["wife"] + result["daut"];
+        return result;
+    };
+
     $("#show-links-btn").click(function(event){
         $("#links-list-area").val("");
-        $.each(instance.getAllConnections(), function(index, el) {
-            var name1 = $("#"+el.sourceId).attr("name");
-            var name2 = $("#"+el.targetId).attr("name");
-            $("#links-list-area").val($("#links-list-area").val() + name1 + " -> " + name2 + "\n");
-        });
-        if($("#links-list-area").val() === "") {
-            $("#links-list-area").val("No connection...");
-        }
+        var nums = getNumList();
+        $("#men-num").text(nums["man"]);
+        $("#women-num").text(nums["wife"]);
+        $("#girl-num").text(nums["daut"]);
+        $("#all-num").text(nums["all"]);
+        $("#con-num").text(instance.getAllConnections().length);
+        $("#most-wife").text(nums["mostWife"]);
+        $("#most-child").text(nums["mostChild"]);
         $("#links-list").fadeIn(400);
     });
 
@@ -776,3 +810,5 @@ jsPlumb.ready(function() {
 // 2015 12 09 18 07
 // 2015 12 09 22 25
 // 2015 12 11 16 31
+// 2015 12 12 11 45
+// 2015 12 13 09 37
